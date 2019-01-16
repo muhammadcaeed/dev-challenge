@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+<div class="container">
+  <h3>Movie Details</h3>
+  <br>
+  <div *ngIf="movie">
+      <div class="media">
+          <img [src]="movie.image" class="align-self-center mr-3" alt="...">
+          <div class="media-body">
+            <h5>Movie Name: {{movie?.name}}</h5>
+            <p>Movie Description: {{movie?.description}}</p>
+            <p>Movie Category: {{movie?.category}}</p>
+            <p>Released Year: {{movie?.year}}</p>
+          </div>
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary" [routerLink]="['/edit', {id: movie.id}]" >Edit Movie</button>
+        &nbsp;
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmation">Delete Movie</button>
+  </div>
+  <div *ngIf="!movie">
+    <br>
+    <h5>Incorrect movie id</h5>
+  </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="cofirmation" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cofirmation">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this movie?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteMovie()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>

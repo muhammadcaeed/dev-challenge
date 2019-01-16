@@ -1,0 +1,66 @@
+<app-header></app-header>
+
+<div class="container">
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <h3>{{ heading }}</h3>
+  <br>
+
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="name">Name *</label>
+      <input type="text" class="form-control" formControlName="name" id="name" placeholder="Movie name">
+      <div *ngIf="name.touched && name.invalid">
+        <div *ngIf="name.errors?.required">Movie name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="category">Category *</label>
+      <select class="form-control" formControlName="category" id="category">
+        <option>Action</option>
+        <option>Adventure</option>
+        <option>Comedy</option>
+        <option>Crime</option>
+        <option>Horror</option>
+      </select>
+      <div *ngIf="category.touched && category.invalid">
+        <div *ngIf="category.errors?.required">Category is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description *</label>
+      <textarea class="form-control" formControlName="description" id="description" rows="3"></textarea>
+      <div *ngIf="description.touched && description.invalid">
+        <div *ngIf="description.errors?.required">Description is required</div>
+      </div>   
+    </div>
+
+    <div class="form-group">
+      <label for="year">Year *</label>
+      <input type="number" class="form-control" formControlName="year" id="year" placeholder="Publish year">
+      <div *ngIf="year.touched && year.invalid">
+        <div *ngIf="year.errors?.required">Publishing year is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image URL *</label>
+      <input type="text" class="form-control" id="image" formControlName="image" placeholder="http://www.example.com/image.png">
+      <div *ngIf="image.touched && image.invalid">
+        <div *ngIf="image.errors?.required">Image URL is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <br>
+      <button         
+        type="submit"
+        (click)="type == 'add' ? addMovie() : updateMovie() "
+        [disabled] = "form.invalid"
+        class="btn btn-primary btn-lg btn-block">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="container">
+  <div class="page-header">
+    <h1>Welcome to Personal Movie Library</h1>
+    <br>
+  </div>
+  <div>  
+    <h3>Movies List</h3>
+    <div class="float-right">
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter By
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" (click)="filterMovies('name')">Name</a>
+          <a class="dropdown-item" (click)="filterMovies('category')">Category</a>
+          <a class="dropdown-item" (click)="filterMovies('year')">Year</a>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div *ngIf="movies['length']" class="row">
+    <div *ngFor="let movie of movies" class="col-md-4">
+      <br>
+      <div class="card">
+        <img [src]="movie.image" class="card-img-top card-img" alt="no image to display">
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.name }}</h5>
+          <p class="card-text">{{ movie.category }}</p>
+          <p class="card-text">Published in: {{ movie.year }}</p>
+          <a class="btn btn-primary" [routerLink]="['details', {id: movie.id}]">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!movies['length']">
+    <br><br>
+    <h4 class="text-secondary">No movies to display.</h4>
+    <h5 class="text-secondary">Please add some movies.</h5>
+  </div>
+  
+</div>
